@@ -3,7 +3,7 @@ function gameBoard(){
 	const arr = [[" "," "," "],[" "," ",""],[" "," "," "]];
 	
 	//To render the gameboard
-	function renderArray(){
+	function render(){
 		let pattern = "";
 		for(let i in arr){
 			pattern += "\n";
@@ -14,23 +14,32 @@ function gameBoard(){
 		}
 		
 	//To edit the gameboard
-	function editArray(postion1,postion2){
+	function edit(postion1,postion2,symbol){
 		let choice = arr[postion1][postion2];
-        if(choice === " "){
-         		arr[postion1][postion2] = "X";   
-        }else if(choice === "X"){
-						arr[postion1][postion2] = "O";
+    if(choice !== " "){
+			console.log("Cannot overwritte value");
+    }else{
+			arr[postion1][postion2] = symbol;				
 		}
-
-        renderArray();
-	}
+		render();
+		}
 	
-	return {editArray,renderArray};
+	return {edit,render};
 	
 }
 
+function player1(name = "Player1"){
+	const symbol = "X";
+	return {name,symbol};
+}
+
+function player2(name = "Player2"){
+	const symbol = "O";
+	return {name,symbol}
+}
+
 const game1 = gameBoard();
-game1.renderArray()
-game1.editArray(1,1)
-game1.editArray(0,1);
-game1.editArray(2,1);
+const p1 = player1("Shivane");
+const p2 = player2("Anuj");
+
+game1.render();
