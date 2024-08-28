@@ -30,20 +30,35 @@ const game = (function(){
 	}}
 	
 	//check for winning condition
+	const check = function(){
+		const winning = [
+			[0,1,2],
+			[3,4,5],
+			[6,7,8],
+			[0,3,6],
+			[1,4,7],
+			[2,5,8],
+			[0,4,8],
+			[2,4,6]
+		]
+		
+		for(let i of winning){
+			const [a,b,c] = i;
+			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
+				return true;
+				}else{
+			}
+		}
+		return false;
+	}
 	
-	
-	return {render,edit,clear}
+	return {render,edit,clear,check}
 })();
 
-game.edit(0,0);
+game.edit(0,1);
 game.edit(1,1);
 game.edit(2,2);
-game.edit(3,3);
-game.edit(4,4);
-game.edit(5,5);
-game.edit(6,6);
-game.edit(7,7);
-game.edit(8,8);
+game.edit(3,1);
+game.edit(6,3);
 game.render();
-game.clear();
-game.render();
+console.log(game.check());
