@@ -14,12 +14,12 @@ const game = (function(){
 	}
 	
 	//clear the gameboard
-	const clear = function(){
+	const reset = function(){
 		arr.forEach((item,index,ar) => ar[index] = " ");
 	}
 	
 	//to edit the gameBoard array
-	const edit = function(pos,symbol){
+	const play = function(pos,symbol){
 	const choice = arr[pos];
 	if(choice !== " "){
 		console.log(`${pos} already occupied`);
@@ -52,18 +52,16 @@ const game = (function(){
 		return false;
 	}
 	
-	return {render,edit,clear,check}
+	return {render,play,check,reset}
 })();
 
-game.edit(0,1);
-game.edit(1,1);
-game.edit(2,1);
-game.edit(3,4);
-game.edit(4,4);
-game.edit(5,4);
-game.edit(6,9);
-game.edit(7,9);
-game.edit(8,9);
-game.clear();
-game.edit(0,1)
-game.render();
+const player1 = (function(){
+	symbol = "X";
+	
+	return {symbol}
+})();
+
+const player2 = (function(){
+	symbol = "O";
+	return {symbol};
+})();
