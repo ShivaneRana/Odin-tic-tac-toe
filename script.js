@@ -1,6 +1,5 @@
-function gameBoard(){
-	//const arr = [" "," "," "," "," "," "," "," "," "];
-	const arr = [1,1,1,1,1,1,1,1,1]
+const game = (function(){
+	const arr = [" "," "," "," "," "," "," "," "," "];
 	
 	//to display the array in 2d
 	const render = function(){
@@ -14,20 +13,37 @@ function gameBoard(){
 		console.log(pattern);
 	}
 	
+	//clear the gameboard
+	const clear = function(){
+		
+	}
+	
 	//to edit the gameBoard array
 	const edit = function(pos,symbol){
 	const choice = arr[pos];
 	if(choice !== " "){
-		console.log("No changes were made");	
+		console.log(`${pos} already occupied`);
+		return false;
 	}else{
 		arr[pos] = symbol;
+		return true;
 	}}
 	
 	//check for winning condition
 	
 	
-	return {render,edit}
-}
+	return {render,edit,clear}
+})();
 
-const game1 = gameBoard();
-
+game.edit(0,0);
+game.edit(1,1);
+game.edit(2,2);
+game.edit(3,3);
+game.edit(4,4);
+game.edit(5,5);
+game.edit(6,6);
+game.edit(7,7);
+game.edit(8,8);
+game.render();
+game.clear();
+game.render();
