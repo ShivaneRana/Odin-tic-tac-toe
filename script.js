@@ -79,8 +79,10 @@ const player2 = (function(name = "Player2"){
 const gameFlow = (function(){
 	const play = function(){
 		console.log("Let's Play Tic Tac Toe!");
-		
+        console.log("ashaivldsf\n ahdfjssdjafl");
 	};
 	
 	return {play};
 })();
+
+gameFlow.play();
