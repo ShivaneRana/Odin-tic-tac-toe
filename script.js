@@ -59,6 +59,5 @@ game.edit(0,1);
 game.edit(1,1);
 game.edit(2,2);
 game.edit(3,1);
-game.edit(6,3);
+game.edit(6,1);
 game.render();
-console.log(game.check());
