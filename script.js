@@ -73,3 +73,14 @@ const player2 = (function(name = "Player2"){
 	}
 	return {name,symbol,getScore};
 })();
+
+
+//controls the flow of the game
+const gameFlow = (function(){
+	const play = function(){
+		console.log("Let's Play Tic Tac Toe!");
+		
+	};
+	
+	return {play};
+})();
