@@ -19,7 +19,7 @@ const game = (function(){
 	}
 	
 	//to edit the gameBoard array
-	const play = function(pos,symbol){
+	const edit = function(pos,symbol){
 	const choice = arr[pos];
 	if(choice !== " "){
 		console.log(`${pos} already occupied`);
@@ -52,16 +52,24 @@ const game = (function(){
 		return false;
 	}
 	
-	return {render,play,check,reset}
+	return {render,edit,check,reset}
 })();
 
-const player1 = (function(){
-	symbol = "X";
-	
-	return {symbol}
+
+const player1 = (function(name = "Player1"){
+	const symbol = "X";
+	let score = 0;
+	const getScore = function(){
+		return score;
+	}
+	return {getScore,symbol,name}
 })();
 
-const player2 = (function(){
-	symbol = "O";
-	return {symbol};
+const player2 = (function(name = "Player2"){
+	const symbol = "O";
+	let score = 0;
+	function getScore(){
+		return score;
+	}
+	return {name,symbol,getScore};
 })();
