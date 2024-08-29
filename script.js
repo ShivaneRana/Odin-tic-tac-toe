@@ -66,6 +66,11 @@
 		for(let i of winning){
 			const [a,b,c] = i;
 			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
+				if(arr[b] === "X"){
+					console.log("X has won!")
+				}else{
+					console.log("O has won!")
+				}
 				return true;
 				}
 		}
@@ -94,13 +99,13 @@ const player2 = (function(name = "Player2"){
 	return {name,symbol,getScore};
 })();
 
-game.edit(player1.symbol);
-game.edit(player2.symbol);
-game.edit(player1.symbol);
-game.edit(player2.symbol);
-game.edit(player1.symbol);
-game.edit(player2.symbol);
-game.edit(player1.symbol);
-game.edit(player2.symbol);
-game.edit(player1.symbol);
+game.edit(player1.symbol); //1
+game.edit(player2.symbol); //2
+game.edit(player1.symbol); //3
+game.edit(player2.symbol); //4
+game.edit(player1.symbol); //5
+game.edit(player2.symbol); //6
+game.edit(player1.symbol); //7
+game.edit(player2.symbol); //8
+game.edit(player1.symbol); //9
 
