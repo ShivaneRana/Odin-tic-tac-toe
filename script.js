@@ -29,6 +29,17 @@ const game = (function(){
 		return true;
 	}}
 	
+	//check if filled without a win
+	const isNowFilled = function(){
+	for(let i = 0;i<arr.length;i++){
+		if(arr[i] === " "){
+			return false;
+		}
+	}
+	return true;
+}
+
+	
 	//check for winning condition
 	const check = function(){
 		const winning = [
@@ -52,10 +63,9 @@ const game = (function(){
 		return false;
 	}
 	
-	return {render,edit,check,reset}
+	return {render,edit,check,reset,isNowFilled}
 })();
 
-game.filled();
 
 const player1 = (function(name = "Player1"){
 	const symbol = "X";
@@ -90,3 +100,4 @@ const gameFlow = (function(){
   
   return {play};
 })();
+
