@@ -55,6 +55,7 @@ const game = (function(){
 	return {render,edit,check,reset}
 })();
 
+game.filled();
 
 const player1 = (function(name = "Player1"){
 	const symbol = "X";
@@ -77,12 +78,15 @@ const player2 = (function(name = "Player2"){
 
 //controls the flow of the game
 const gameFlow = (function(){
-	const play = function(){
-		console.log("Let's Play Tic Tac Toe!");
-        console.log("ashaivldsf\n ahdfjssdjafl");
-	};
-	
-	return {play};
+  const play = function(){
+    console.log("Let's Play Tic Tac Toe!");
+    const name1 = prompt("Enter name for player1");
+    player1.name = name1;
+    const name2 = prompt("Enter name for player2");
+    player2.name = name2;
+    game.render();
+    
+  };
+  
+  return {play};
 })();
-
-gameFlow.play();
