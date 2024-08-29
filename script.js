@@ -19,22 +19,20 @@ const game = (function(){
 	}
 	
 	//to edit the gameBoard array
-	const edit = function(pos,symbol){
-	let choice = arr[pos];
-	//the target is out of bound so no changes
-	if(pos > 8){
-		console.log("The target position is out of bound");
-		return false
-	}
-	//the target is occupied so no changes
-	else if(choice !== " "){
-		console.log("The target is already Occupied");
-		return false;
-	}
-	//the value has been assigned
-	arr[pos] = symbol;
-	return true;
-	};
+	const edit = function(symbol){
+	let isValid = false;
+	while(isValid === false){
+		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);		
+		if(choice >= 8 || choice === null || choice === undefined){
+			console.log("The target value is out of bound");
+		}else if(arr[choice] !== " "){
+			console.log("The value is pre occupied");
+		}else{
+			arr[choice] = symbol;
+			console.log("gameBoard has been edited");
+			isValid = true;		
+		}}};
+
 	
 	//check if filled without a win
 	const isNowFilled = function(){
@@ -94,14 +92,8 @@ const player2 = (function(name = "Player2"){
 })();
 
 
-game.edit(0,1);
-game.edit(1,1);
-game.edit(2,1);
-game.edit(3,1);
-game.edit(4,1);
-game.edit(5,1);
-game.edit(6,1);
-game.edit(7,1);
-game.edit(8,1);
+game.edit(player1.symbol);
+game.edit(player2.symbol);
+game.edit(player1.symbol);
 game.render()
 
