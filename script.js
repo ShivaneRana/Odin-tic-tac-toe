@@ -1,4 +1,4 @@
-const game = (function(){
+;const game = (function(){
 	const arr = [" "," "," "," "," "," "," "," "," "];
 	
 	//to display the array in 2d
@@ -23,14 +23,17 @@ const game = (function(){
 	let isValid = false;
 	while(isValid === false){
 		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);		
-		if(choice >= 8 || choice === null || choice === undefined){
+		if(choice > 8 || choice === null || choice === undefined){
 			console.log("The target value is out of bound");
+			game.render();
 		}else if(arr[choice] !== " "){
 			console.log("The value is pre occupied");
+			game.render();
 		}else{
 			arr[choice] = symbol;
 			console.log("gameBoard has been edited");
-			isValid = true;		
+			isValid = true;
+			game.render();
 		}}};
 
 	
@@ -91,9 +94,13 @@ const player2 = (function(name = "Player2"){
 	return {name,symbol,getScore};
 })();
 
-
 game.edit(player1.symbol);
 game.edit(player2.symbol);
 game.edit(player1.symbol);
-game.render()
+game.edit(player2.symbol);
+game.edit(player1.symbol);
+game.edit(player2.symbol);
+game.edit(player1.symbol);
+game.edit(player2.symbol);
+game.edit(player1.symbol);
 
