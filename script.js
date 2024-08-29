@@ -22,18 +22,15 @@
 	const edit = function(symbol){
 	let isValid = false;
 	while(isValid === false){
-		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);		
+		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);
 		if(choice > 8 || choice === null || choice === undefined){
 			console.log("The target value is out of bound");
-			game.render();
 		}else if(arr[choice] !== " "){
 			console.log("The value is pre occupied");
-			game.render();
 		}else{
 			arr[choice] = symbol;
 			console.log("gameBoard has been edited");
 			isValid = true;
-			game.render();
 		}}};
 
 	
@@ -99,13 +96,5 @@ const player2 = (function(name = "Player2"){
 	return {name,symbol,getScore};
 })();
 
-game.edit(player1.symbol); //1
-game.edit(player2.symbol); //2
-game.edit(player1.symbol); //3
-game.edit(player2.symbol); //4
-game.edit(player1.symbol); //5
-game.edit(player2.symbol); //6
-game.edit(player1.symbol); //7
-game.edit(player2.symbol); //8
-game.edit(player1.symbol); //9
+
 
