@@ -20,22 +20,31 @@ const game = (function(){
 	
 	//to edit the gameBoard array
 	const edit = function(pos,symbol){
-	const choice = arr[pos];
-	if(choice !== " "){
-		console.log(`${pos} already occupied`);
+	let choice = arr[pos];
+	//the target is out of bound so no changes
+	if(pos > 8){
+		console.log("The target position is out of bound");
+		return false
+	}
+	//the target is occupied so no changes
+	else if(choice !== " "){
+		console.log("The target is already Occupied");
 		return false;
-	}else{
-		arr[pos] = symbol;
-		return true;
-	}}
+	}
+	//the value has been assigned
+	arr[pos] = symbol;
+	return true;
+	};
 	
 	//check if filled without a win
 	const isNowFilled = function(){
 	for(let i = 0;i<arr.length;i++){
 		if(arr[i] === " "){
+			//the array still hase space to fill
 			return false;
 		}
 	}
+	//the array has been filled
 	return true;
 }
 
@@ -57,8 +66,7 @@ const game = (function(){
 			const [a,b,c] = i;
 			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
 				return true;
-				}else{
-			}
+				}
 		}
 		return false;
 	}
@@ -86,18 +94,14 @@ const player2 = (function(name = "Player2"){
 })();
 
 
-//controls the flow of the game
-const gameFlow = (function(){
-  const play = function(){
-    console.log("Let's Play Tic Tac Toe!");
-    const name1 = prompt("Enter name for player1");
-    player1.name = name1;
-    const name2 = prompt("Enter name for player2");
-    player2.name = name2;
-    game.render();
-    
-  };
-  
-  return {play};
-})();
+game.edit(0,1);
+game.edit(1,1);
+game.edit(2,1);
+game.edit(3,1);
+game.edit(4,1);
+game.edit(5,1);
+game.edit(6,1);
+game.edit(7,1);
+game.edit(8,1);
+game.render()
 
