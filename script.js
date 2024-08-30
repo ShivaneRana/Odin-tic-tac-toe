@@ -96,5 +96,34 @@ const player2 = (function(name = "Player2"){
 	return {name,symbol,getScore};
 })();
 
+const gameFlow = (function(){
+	const play = function(){
+		let flag = true;
+		console.log("Lets play tic-tac-toe");
+		console.log("input position where you want to place your choice");
+		let chooseName = prompt("Enter player1 name~ ");
+		player1.name = chooseName;
+		chooseName = prompt("Enter player2 name~");
+		player2.name = chooseName;
+		console.log(`Player1: ${player1.name} Symbol: ${player1.symbol}`);
+		console.log(`Player2: ${player2.name} Symbol: ${player2.symbol}`);
+		console.log("Game Start!")
+		for(let i = 0;i<=3;i++){
+			game.edit(player1.symbol);
+			game.render();
+			game.check();
+			game.edit(player2.symbol);
+			game.render();
+			game.check()
+			if(game.check === true){
+				break;
+			}
+		}
+		game.edit(player1.symbol);
+		game.render()
+	}
 
+	return {play};
+})();
 
+gameFlow.play()
