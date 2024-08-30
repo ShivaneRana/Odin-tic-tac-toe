@@ -31,12 +31,11 @@
 		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);
 		choice = parseInt(choice);
 		if(choice > 8 || choice === null){
-			console.log("The target value is out of bound");
+			console.log("Target out-of-bound");
 		}else if(arr[choice] !== " "){
-			console.log("The value is pre occupied");
+			console.log("Target pre-occupied");
 		}else{
 			arr[choice] = symbol;
-			console.log("gameBoard has been edited");
 			isValid = true;
 		}}};
 
