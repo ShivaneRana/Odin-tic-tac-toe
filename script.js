@@ -3,14 +3,19 @@
 	
 	//to display the array in 2d
 	const render = function(){
-		let pattern = "\n";
-		for(let i = 0;i<arr.length;i++){
-			pattern += arr[i];
-			if(pattern.length % 4 === 0){
-				pattern += "\n";
-			}
+	let pattern = "\n";
+	for(let i = 0;i<arr.length;i++){
+		pattern += "|";
+		pattern += arr[i];
+		pattern += "|";
+		if(pattern.length % 10 == 0){
+			pattern += "\n";
 		}
-		console.log(pattern);
+	}
+	
+	console.log("-".repeat(10));
+	console.log(pattern);
+	console.log("-".repeat(10));
 	}
 	
 	//clear the gameboard
@@ -23,7 +28,8 @@
 	let isValid = false;
 	while(isValid === false){
 		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);
-		if(choice > 8 || choice === null || choice === undefined){
+		choice = parseInt(choice);
+		if(choice > 8 || choice === null){
 			console.log("The target value is out of bound");
 		}else if(arr[choice] !== " "){
 			console.log("The value is pre occupied");
@@ -81,10 +87,13 @@
 const player1 = (function(name = "Player1"){
 	const symbol = "X";
 	let score = 0;
+	const incrementScore = function(){
+		score++;
+	};
 	const getScore = function(){
 		return score;
 	}
-	return {getScore,symbol,name}
+	return {getScore,symbol,name,incrementScore}
 })();
 
 const player2 = (function(name = "Player2"){
@@ -93,12 +102,14 @@ const player2 = (function(name = "Player2"){
 	function getScore(){
 		return score;
 	}
-	return {name,symbol,getScore};
+	const incrementScore = function(){
+		score++;
+	};
+	return {name,symbol,getScore,incrementScore};
 })();
 
 const gameFlow = (function(){
 	const play = function(){
-		let flag = true;
 		console.log("Lets play tic-tac-toe");
 		console.log("input position where you want to place your choice");
 		let chooseName = prompt("Enter player1 name~ ");
@@ -108,22 +119,12 @@ const gameFlow = (function(){
 		console.log(`Player1: ${player1.name} Symbol: ${player1.symbol}`);
 		console.log(`Player2: ${player2.name} Symbol: ${player2.symbol}`);
 		console.log("Game Start!")
-		for(let i = 0;i<=3;i++){
-			game.edit(player1.symbol);
-			game.render();
-			game.check();
-			game.edit(player2.symbol);
-			game.render();
-			game.check()
-			if(game.check === true){
-				break;
-			}
-		}
-		game.edit(player1.symbol);
-		game.render()
 	}
 
 	return {play};
 })();
 
-gameFlow.play()
+
+game.render();
+game.edit("X");
+game.render();
