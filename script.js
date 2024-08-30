@@ -71,8 +71,10 @@
 			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
 				if(arr[b] === "X"){
 					console.log("X has won!");
+					player1.incrementScore();
 				}else{
-					console.log("O has won!")
+					console.log("O has won!");
+					player2.incrementScore();
 				}
 				// if someone has already won
 				return true;
@@ -146,7 +148,7 @@ const gameFlow = (function(){
 				console.log("The gameBoard is now filled");
 				break;
 			}
-			
+
 			game.edit(player1.symbol);
 			game.render();
 			if(game.check() === true){
@@ -165,6 +167,8 @@ const gameFlow = (function(){
 				break;
 			}
 		}
+		console.log(`${player1.name} score: ${player1.getScore()}`);
+		console.log(`${player2.name} score: ${player2.getScore()}`);
 		console.log("Game has finished");
 	}
 
