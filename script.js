@@ -21,6 +21,7 @@
 	//clear the gameboard
 	const reset = function(){
 		arr.forEach((item,index,ar) => ar[index] = " ");
+		game.render();
 	}
 	
 	//to edit the gameBoard array
@@ -70,10 +71,10 @@
 			const [a,b,c] = i;
 			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
 				if(arr[b] === "X"){
-					console.log("X has won!");
+					console.log(`${player1.name} won the game!`);
 					player1.incrementScore();
 				}else{
-					console.log("O has won!");
+					console.log(`${player2.name} won the game!`);
 					player2.incrementScore();
 				}
 				// if someone has already won
@@ -136,37 +137,42 @@ const gameFlow = (function(){
 		console.log(`Player1: ${player1.name} Sign: ${player1.symbol}`);
 		console.log(`Player2: ${player2.name} Sign: ${player2.symbol}`);
 		console.log("Lets's Start!");
-		game.render()
 
 		// this will be used to check if the player wants to resatrt the game again
 		let restart = false;
-		let move = 0;
-		while((!game.check()) || (!game.isNowFilled())){
-			if(game.check() === true){
-				break;
-			}else if(game.isNowFilled() === true){
-				console.log("The gameBoard is now filled");
-				break;
+		while(restart === false){
+			game.reset();
+			while((!game.check()) || (!game.isNowFilled())){
+				if(game.check() === true){
+					break;
+				}else if(game.isNowFilled() === true){
+					console.log("The gameBoard is now filled");
+					break;
+				}
+				game.edit(player1.symbol);
+				game.render();
+				if(game.check() === true){
+					break;
+				}else if(game.isNowFilled() === true){
+					console.log("The gameBoard is now filled");
+					break;
+				}
+	
+				game.edit(player2.symbol);
+				game.render();	
+				if(game.check() === true){
+					break;
+				}else if(game.isNowFilled() === true){
+					console.log("The gameBoard is now filled");
+					break;
+				}
 			}
-
-			game.edit(player1.symbol);
-			game.render();
-			if(game.check() === true){
-				break;
-			}else if(game.isNowFilled() === true){
-				console.log("The gameBoard is now filled");
-				break;
-			}
-
-			game.edit(player2.symbol);
-			game.render();	
-			if(game.check() === true){
-				break;
-			}else if(game.isNowFilled() === true){
-				console.log("The gameBoard is now filled");
-				break;
+			let question = confirm("Do you want another round?");
+			if(question === false){
+				restart = true;
 			}
 		}
+
 		console.log(`${player1.name} score: ${player1.getScore()}`);
 		console.log(`${player2.name} score: ${player2.getScore()}`);
 		console.log("Game has finished");
@@ -175,4 +181,4 @@ const gameFlow = (function(){
 	return {play};
 })();
 
-gameFlow.play()
+gameFlow.play();
