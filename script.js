@@ -138,7 +138,7 @@ const gameFlow = (function(){
 
 		// this will be used to check if the player wants to resatrt the game again
 		let restart = false;
-
+		let move = 0;
 		while((!game.check()) || (!game.isNowFilled())){
 			if(game.check() === true){
 				break;
@@ -146,10 +146,24 @@ const gameFlow = (function(){
 				console.log("The gameBoard is now filled");
 				break;
 			}
+			
 			game.edit(player1.symbol);
 			game.render();
+			if(game.check() === true){
+				break;
+			}else if(game.isNowFilled() === true){
+				console.log("The gameBoard is now filled");
+				break;
+			}
+
 			game.edit(player2.symbol);
-			game.render();
+			game.render();	
+			if(game.check() === true){
+				break;
+			}else if(game.isNowFilled() === true){
+				console.log("The gameBoard is now filled");
+				break;
+			}
 		}
 		console.log("Game has finished");
 	}
@@ -157,4 +171,4 @@ const gameFlow = (function(){
 	return {play};
 })();
 
-console.log(player1.getScore())
+gameFlow.play()
