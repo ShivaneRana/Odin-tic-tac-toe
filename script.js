@@ -45,12 +45,10 @@
 	for(let i = 0;i<arr.length;i++){
 		if(arr[i] === " "){
 			//the array still hase space to fill
-			console.log("The gameBoard is not filled");
 			return false;
 		}
 	}
 	//the array has been filled
-	console.log("the gameBoard has been filled")
 	return true;
 }
 
@@ -72,13 +70,15 @@
 			const [a,b,c] = i;
 			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
 				if(arr[b] === "X"){
-					console.log("X has won!")
+					console.log("X has won!");
 				}else{
 					console.log("O has won!")
 				}
+				// if someone has already won
 				return true;
 				}
 		}
+		// if there is no winner currently
 		return false;
 	}
 	
@@ -112,28 +112,41 @@ const player2 = (function(name = "Player2"){
 })();
 
 const gameFlow = (function(){
-	const askName = function(){
-		let chooseName = prompt("What is player1 name?");
-		player1.name = chooseName;
-		chooseName = prompt("What is player2 name?");
-		player2.name = chooseName;
-	}
 	const play = function(){
 		console.log("Lets play Tic-Tac-Toe");
 		console.log("In each player turn enter a position from 0-8 to place your symbol in that position");
-		this.askName();
+		
+		//ask user name
+		// let chooseName = prompt("What is player1 name?");
+		// player1.name = chooseName;
+		// chooseName = prompt("What is player2 name?");
+		// player2.name = chooseName;
+		player1.name = "Shivane";
+		player2.name = "Mayank";
+		
+		//display user name
 		console.log(`Player1: ${player1.name} Sign: ${player1.symbol}`);
 		console.log(`Player2: ${player2.name} Sign: ${player2.symbol}`);
 		console.log("Lets's Start!");
 		game.render()
-		while(game.check !== true || game.isNowFilled() !== true){
+
+		// this will be used to check if the player wants to resatrt the game again
+		let restart = false;
+
+		while((!game.check()) || (!game.isNowFilled())){
+			if(game.check() === true){
+				break;
+			}else if(game.isNowFilled() === true){
+				console.log("The gameBoard is now filled");
+				break;
+			}
 			game.edit(player1.symbol);
 			game.render();
 			game.edit(player2.symbol);
 			game.render();
 		}
+		console.log("Game has finished");
 	}
 
-	return {play,askName};
+	return {play};
 })();
-
