@@ -45,10 +45,12 @@
 	for(let i = 0;i<arr.length;i++){
 		if(arr[i] === " "){
 			//the array still hase space to fill
+			console.log("The gameBoard is not filled");
 			return false;
 		}
 	}
 	//the array has been filled
+	console.log("the gameBoard has been filled")
 	return true;
 }
 
@@ -126,5 +128,4 @@ const gameFlow = (function(){
 
 
 game.render();
-game.edit("X");
 game.render();
