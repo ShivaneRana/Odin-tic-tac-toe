@@ -95,7 +95,10 @@ const player1 = (function(name = "Player1"){
 	const getScore = function(){
 		return score;
 	};
-	return {getScore,symbol,name,incrementScore}
+	const setScore = function(value){
+		score = value;
+	}
+	return {getScore,symbol,name,incrementScore,setScore}
 })();
 
 // player2
@@ -108,7 +111,10 @@ const player2 = (function(name = "Player2"){
 	const incrementScore = function(){
 		score++;
 	};
-	return {name,symbol,getScore,incrementScore};
+	const setScore = function(value){
+		score = value;
+	}
+	return {name,symbol,getScore,incrementScore,setScore};
 })();
 
 const gameFlow = (function(){
@@ -150,3 +156,5 @@ const gameFlow = (function(){
 
 	return {play};
 })();
+
+console.log(player1.getScore())
