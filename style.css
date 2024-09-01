@@ -40,7 +40,6 @@ body{
 
 .top{
     height: 10%;
-    background-color: lightcoral;
 }
 
 .top > h1{
@@ -50,7 +49,6 @@ body{
 
 .bottom{
     height: 90%;
-    background-color: lightseagreen;
     display: grid;
     grid-template-columns: 300px 700px 300px;
     grid-template-rows: auto;
@@ -65,7 +63,6 @@ body{
 
 /* this is for the player1 */
 .bottom > div:first-child{
-    background-color: darkorange;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,14 +73,12 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: darkgreen;
     flex-direction: column;
 }
 
 .base{
     width: 70%;
     height: 70%;
-    background-color: lightsteelblue;
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
@@ -98,9 +93,9 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: lightcoral;
 
     & > button{
+        background-color: whitesmoke;
         height: 60%;
         width: 40%;
         border: none;
@@ -112,26 +107,25 @@ body{
 
         &:hover{
             outline: 2px solid;
+            background-color: lightsteelblue;
             letter-spacing: 0.30rem;
         }
     }
 }
 
 .uwu{
-    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: 2px solid;
 
     &:hover{
-        background-color: darkslateblue;
+        background-color: lightsteelblue;
     }
 }
 
 /* this is for the player2 */
 .bottom > div:last-child{
-    background-color: darkred;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,6 +209,5 @@ body{
 
     .buttonHolder{
         width: 85%;
-        background-color: rebeccapurple;
     }
 }
