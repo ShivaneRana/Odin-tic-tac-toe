@@ -82,7 +82,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
-    outline: 3px dashed black;
+    outline: 4px dashed black;
     margin-bottom: -30px;
 }
 
@@ -117,7 +117,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    outline: 2px solid;
+    outline: 1px solid;
 
     &:hover{
         background-color: lightsteelblue;
@@ -132,7 +132,7 @@ body{
 }
 
 .holder{
-    outline: 3px dashed;
+    outline: 4px dashed;
     display: flex;
     flex-direction: column;
     justify-content: center;
