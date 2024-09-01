@@ -7,6 +7,8 @@ const reset = document.querySelector(".reset");
 const playAgain = document.querySelector(".playAgain");
 player1Name.value = "Player1";
 player2Name.value = "Player2";
+player1Score.textContent = 0;
+player2Score.textContent = 0;
 
 const game = (function(){
 	const arr = [" "," "," "," "," "," "," "," "," "];
@@ -27,10 +29,6 @@ const game = (function(){
 	console.log(pattern);
 	console.log("-".repeat(10));
 	}
-    
-    const geta = function(){
-        return arr;
-    };
 	
 	//clear the gameboard
 	const reset = function(){
@@ -98,11 +96,11 @@ const game = (function(){
 		return false;
 	}
 	
-	return {render,edit,check,reset,isNowFilled,geta}
+	return {render,edit,check,reset,isNowFilled}
 })();
 
 // player1
-const player1 = (function(){
+const player1 = (function(name){
 	const symbol = "X";
 	let score = 0;
 	const incrementScore = function(){
@@ -114,11 +112,8 @@ const player1 = (function(){
 	const setScore = function(value){
 		score = value;
 	}
-    const getName =function(){
-        return player1Name.value;
-    };
 
-	return {getScore,symbol,getName,incrementScore,setScore}
+	return {getScore,symbol,name,incrementScore,setScore}
 })();
 
 // player2
@@ -135,11 +130,7 @@ const player2 = (function(name){
 		score = value;
 	}
 
-    const getName =function(){
-        return player2Name.value;
-    };
-
-	return {getName,symbol,getScore,incrementScore,setScore};
+	return {name,symbol,getScore,incrementScore,setScore};
 })();
 
 const gameFlow = (function(){
@@ -193,14 +184,32 @@ const gameFlow = (function(){
 	return {play};
 })();
 
+const displayCon = (function(){
 
-// for displaying game to DOM
-const displayControl = (function(){
-    const arrToDom = function(arr){
-        uwu.forEach((item,index,arrr) => {
-            item.textContent = arr[index];
-        })
-    }
+	const  p1ScorePlus  = function(){
+		player1.incrementScore();
+		player1Score.textContent = player1.getScore();
+	}
 
-    return {arrToDom};
+	const p2ScorePlus  = function(){
+		player2.incrementScore();
+		player2Score.textContent = player2.getScore();
+	}
+
+	return { p1ScorePlus , p2ScorePlus };
 })();
+
+
+
+uwu.forEach((item,index,arr) => {
+	item.addEventListener("click",() => {
+		console.log(item.dataset.pos);
+	})
+})
+
+reset.addEventListener("click",() => {
+	player1.setScore(0);
+	player2.setScore(0);
+	player1Score.textContent = 0;
+	player2Score.textContent = 0;
+})
