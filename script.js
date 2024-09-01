@@ -181,3 +181,8 @@
 // })();
 
 // gameFlow.play()
+
+const player1Name = document.querySelector(".player1Name");
+const player2Name = document.querySelector(".player2Name");
+player1Name.value = "Player1";
+player2Name.value = "Player2";
