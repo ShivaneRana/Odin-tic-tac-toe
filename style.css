@@ -88,16 +88,17 @@ body{
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
     outline: 3px dashed black;
+    margin-bottom: -30px;
 }
 
 /* constains reset and playagain button */
 .buttonHolder{
     width: 70%;
     height: 10%;
-    background-color: lightseagreen;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: lightcoral;
 
     & > button{
         height: 60%;
@@ -210,5 +211,10 @@ body{
                 letter-spacing: 0.10rem;
             }
         }
+    }
+
+    .buttonHolder{
+        width: 85%;
+        background-color: rebeccapurple;
     }
 }
