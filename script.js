@@ -5,7 +5,8 @@ const p2Score = document.querySelector(".p2Score");
 const reset = document.querySelector(".reset");
 const playAgain = document.querySelector(".playAgain");
 const uwu = document.querySelectorAll(".uwu");
-
+p1Score.textContent = 0;
+p2Score.textContent = 0;
 
 const game = (function(){
 
@@ -50,8 +51,12 @@ const game = (function(){
 			if((arr[a] !== "") && ((arr[a] === arr[b]) && (arr[a] === arr[c]))){
 				if(arr[a] === "X"){
 					console.log(`${player1.name} wins!`);
+					player1.incrementScore();
+					p1Score.textContent = player1.getScore();
 				}else if(arr[a] === "O"){
-					console.log(`${player2.name} wins!`)
+					console.log(`${player2.name} wins!`);
+					player2.incrementScore();
+					p2Score.textContent = player2.getScore();
 				}
 				return true;
 			}
@@ -120,9 +125,9 @@ const player2 = (function(){
 
 uwu.forEach((item,index,array) => {
 	item.addEventListener("click",() => {
-		game.edit(index,player2.symbol);
-		game.winCheck()
-		game.isNowFilled();
+			game.edit(index,player2.symbol);
+			game.winCheck()
+			game.isNowFilled();
 	})
 })
 
@@ -137,3 +142,12 @@ p2Name.addEventListener("input", () => {
 	player2.name = p2Name.value;
 });
 
+reset.addEventListener("click",() => {
+	p1Name.value = "Player1";
+	p2Name.value = "Player2";
+	player1.setScore(0);
+	player2.setScore(0);	
+	p1Score.textContent = 0;
+	p2Score.textContent = 0;
+	game.resetArray();
+});
