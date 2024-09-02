@@ -208,8 +208,5 @@ uwu.forEach((item,index,arr) => {
 })
 
 reset.addEventListener("click",() => {
-	player1.setScore(0);
-	player2.setScore(0);
-	player1Score.textContent = 0;
-	player2Score.textContent = 0;
+	game.resetArray();
 })
