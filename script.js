@@ -6,6 +6,7 @@ const reset = document.querySelector(".reset");
 const playAgain = document.querySelector(".playAgain");
 const uwu = document.querySelectorAll(".uwu");
 
+
 const game = (function(){
 
 	const arr = ["","","","","","","","",""];
@@ -91,7 +92,7 @@ const player1 = (function(){
 	const incrementScore = function(){
 		score++;
 	}
-	
+
 	return {getScore,name,symbol,incrementScore,setScore};
 })();
 
