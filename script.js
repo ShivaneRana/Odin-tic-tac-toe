@@ -179,5 +179,3 @@ const gameFlow = (function(){
 
 	return {play};
 })();
-
-gameFlow.play();
