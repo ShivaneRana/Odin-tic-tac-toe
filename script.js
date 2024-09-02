@@ -203,7 +203,7 @@ const displayCon = (function(){
 
 uwu.forEach((item,index,arr) => {
 	item.addEventListener("click",() => {
-		console.log(item.dataset.pos);
+		
 	})
 })
 
