@@ -108,6 +108,10 @@ const game = (function(){
 		}
 	};
 
+	const getArr = function(){
+		return arr;
+	}
+
 	// check if array is filled
 	const isNowFilled = function(){
 		if(arr.includes("")){
@@ -167,7 +171,7 @@ const game = (function(){
 		console.log("Array had a reset");
 	}
 
-	return {edit,isNowFilled,check,resetArray};
+	return {edit,isNowFilled,check,resetArray,getArr};
 })();
 
 // reset the entire game
@@ -189,15 +193,21 @@ reset.addEventListener("click",() => {
 uwu.forEach((item, index) => {
     item.addEventListener("click", () => {
         if (conditions.getAllowed()) {
-			// if the getTurn is even then it is player1 Turn if odd palyer2
             const currentPlayer = conditions.getTurn() % 2 === 0 ? player1 : player2;
-			// only allowed to change value if game.edit returns true
             const moveSuccess = game.edit(index, currentPlayer.symbol);
             if (moveSuccess) {
                 item.textContent = currentPlayer.symbol;
-                if (game.check() || game.isNowFilled()) {
+
+                if (game.check()) {
+                    // If there's a winner, stop the game
+                    conditions.setAllowed(false);
+                } else if (game.isNowFilled()) {
+                    // If the board is full and there's no winner, declare a draw
+                    dialogText.textContent = "It's a draw!";
+                    dialog.showModal();
                     conditions.setAllowed(false);
                 }
+
                 conditions.incrementTurn();
             }
         }
