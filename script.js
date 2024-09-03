@@ -85,10 +85,12 @@ const conditions = (function(){
 	return {getTurn,incrementTurn,getAllowed,setAllowed};
 })()
 
+
+// contains main game function
 const game = (function(){
 	const arr = ["","","","","","","","",""];
 
-
+	// edit only valid choice
 	const edit = function(num,Symbol){
 		if(num > 8){
 			console.log("num is out of bound");
@@ -103,6 +105,7 @@ const game = (function(){
 		}
 	};
 
+	// check if array is filled
 	const isNowFilled = function(){
 		if(arr.includes("")){
 			console.log("The array is not full yet!");
@@ -114,6 +117,7 @@ const game = (function(){
 		}
 	}
 
+	// check fow winning condition
 	const check = function(){
 		const winning = [
 			[0,1,2],
@@ -147,6 +151,7 @@ const game = (function(){
 
 	}
 
+	// rest array
 	const resetArray = function(){
 		arr.forEach((item,index,arr) => {
 			arr[index] = "";
@@ -154,11 +159,7 @@ const game = (function(){
 		console.log("Array had a reset");
 	}
 
-	const displayArray = function(){
-		console.log(arr);
-	}
-
-	return {edit,displayArray,isNowFilled,check,resetArray};
+	return {edit,isNowFilled,check,resetArray};
 })();
 
 // reset the entire game
@@ -177,26 +178,25 @@ reset.addEventListener("click",() => {
 });
 
 
-uwu.forEach((item,index,array) => {
-	item.addEventListener("click",() => {
-	if(conditions.getAllowed() === true){
-		if(conditions.getTurn() % 2 !== 0){
-			item.textContent = player2.symbol;	
-			game.edit(index,player2.symbol);
-			conditions.incrementTurn();
-			game.check()
-			game.isNowFilled();
-		}else if(conditions.getTurn() % 2 === 0){
-			item.textContent = player1.symbol;
-			game.edit(index,player1.symbol);
-			game.check()
-			game.isNowFilled();
-			conditions.incrementTurn();
-		}
-	}
-	})
+uwu.forEach((item, index) => {
+    item.addEventListener("click", () => {
+        if (conditions.getAllowed()) {
+			// if the getTurn is even then it is player1 Turn if odd palyer2
+            const currentPlayer = conditions.getTurn() % 2 === 0 ? player1 : player2;
+			// only allowed to change value if game.edit returns true
+            const moveSuccess = game.edit(index, currentPlayer.symbol);
+            if (moveSuccess) {
+                item.textContent = currentPlayer.symbol;
+                if (game.check() || game.isNowFilled()) {
+                    conditions.setAllowed(false);
+                }
+                conditions.incrementTurn();
+            }
+        }
+    });
 });
 
+// can be used to continue playing game without reseting the score board
 playAgain.addEventListener("click",() => {
 	game.resetArray();
 	conditions.setAllowed(true);
