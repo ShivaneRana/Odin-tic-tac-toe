@@ -40,8 +40,6 @@ Play Again:
 
 Feel free to open issues or submit pull requests if you have suggestions or improvements.
 
-# Live Preview
-
-https://shivanerana.github.io/Odin-tic-tac-toe/
+-------
 
 Feel free to add or modify sections based on additional features or details about your project!
