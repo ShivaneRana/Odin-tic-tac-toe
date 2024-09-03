@@ -1,59 +1,123 @@
-;const game = (function(){
-	const arr = [" "," "," "," "," "," "," "," "," "];
-	
-	//to display the array in 2d
-	const render = function(){
-	let pattern = "\n";
-	for(let i = 0;i<arr.length;i++){
-		pattern += "|";
-		pattern += arr[i];
-		pattern += "|";
-		if(pattern.length % 10 == 0){
-			pattern += "\n";
-		}
-	}
-	
-	console.log("-".repeat(10));
-	console.log(pattern);
-	console.log("-".repeat(10));
-	}
-	
-	//clear the gameboard
-	const reset = function(){
-		arr.forEach((item,index,ar) => ar[index] = " ");
-		game.render();
-	}
-	
-	//to edit the gameBoard array
-	const edit = function(symbol){
-	let isValid = false;
-	while(isValid === false){
-		let choice = prompt(`Enter a position from 0 to ${arr.length-1}`);
-		choice = parseInt(choice);
-		if(choice > 8 || choice === null){
-			console.log("Target out-of-bound");
-		}else if(arr[choice] !== " "){
-			console.log("Target pre-occupied");
-		}else{
-			arr[choice] = symbol;
-			isValid = true;
-		}}};
+const p1Name = document.querySelector(".player1Name");
+const p2Name = document.querySelector(".player2Name");
+const p1Score = document.querySelector(".p1Score");
+const p2Score = document.querySelector(".p2Score");
+const reset = document.querySelector(".reset");
+const playAgain = document.querySelector(".playAgain");
+const uwu = document.querySelectorAll(".uwu");
+p1Score.textContent = 0;
+p2Score.textContent = 0;
+p1Name.value = "Player1";
+p2Name.value = "Player2";
 
-	
-	//check if filled without a win
-	const isNowFilled = function(){
-	for(let i = 0;i<arr.length;i++){
-		if(arr[i] === " "){
-			//the array still hase space to fill
+// player1 module
+const player1 = (function(){
+	let name = p1Name.value;
+	const symbol = "X";
+	let score = 0;
+
+	const getScore = function(){
+		return score;
+	}
+
+	const setScore = function(value){
+		score = value;
+	}
+
+	const incrementScore = function(){
+		score++;
+	}
+
+	return {getScore,name,symbol,incrementScore,setScore};
+})();
+
+// player2 module 
+const player2 = (function(){
+	let name = p2Name.value;
+	const symbol = "O";
+	let score = 0;
+
+	const getScore = function(){
+		return score;
+	}
+
+	const setScore = function(value){
+		score = value;
+	}
+
+	const incrementScore = function(){
+		score++;
+	}
+
+	return {getScore,name,symbol,incrementScore,setScore};
+})();
+
+// to keep player1 name upto date
+p1Name.addEventListener("input", () => {
+	player1.name = p1Name.value;
+})
+
+// to keep player2 name upto date
+p2Name.addEventListener("input", () => {
+	player2.name = p2Name.value;
+});
+
+// all kind of condition to be checked for gameFlow
+const conditions = (function(){
+	let turn = 0;
+	let allowed = true;
+	const getTurn = function(){
+		return turn;
+	}
+
+	const incrementTurn = function(){
+		turn++;
+	}
+
+	const getAllowed = function(){
+		return allowed;
+	}
+
+	const setAllowed = function(value){
+		allowed = value;
+	}
+
+	return {getTurn,incrementTurn,getAllowed,setAllowed};
+})()
+
+
+// contains main game function
+const game = (function(){
+	const arr = ["","","","","","","","",""];
+
+	// edit only valid choice
+	const edit = function(num,Symbol){
+		if(num > 8){
+			console.log("num is out of bound");
 			return false;
+		}else if(arr[num] !== ""){
+			console.log("Target is already occupied");
+			return false;
+		}else{
+			arr.splice(num,1,Symbol);
+			console.log(arr);
+			return true;
+		}
+	};
+
+	// check if array is filled
+	const isNowFilled = function(){
+		if(arr.includes("")){
+			console.log("The array is not full yet!");
+			return false;
+		}else if(!(arr.includes(""))){
+			console.log("The array is Full!");
+			conditions.setAllowed(false);
+			return true;
 		}
 	}
-	//the array has been filled
-	return true;
-}
 
-	
-	//check for winning condition
+	// check fow winning condition
 	const check = function(){
 		const winning = [
 			[0,1,2],
@@ -63,119 +127,80 @@
 			[1,4,7],
 			[2,5,8],
 			[0,4,8],
-			[2,4,6]
+			[2,4,6],
 		]
-		
+
 		for(let i of winning){
 			const [a,b,c] = i;
-			if(arr[c] !== " " && (arr[a] === arr[b] && arr[a] === arr[c])){
-				if(arr[b] === "X"){
-					console.log(`${player1.name} won the game!`);
+			if((arr[a] !== "") && ((arr[a] === arr[b]) && (arr[a] === arr[c]))){
+				if(arr[a] === "X"){
+					console.log(`${player1.name} wins!`);
 					player1.incrementScore();
-				}else{
-					console.log(`${player2.name} won the game!`);
+					p1Score.textContent = player1.getScore();
+				}else if(arr[a] === "O"){
+					console.log(`${player2.name} wins!`);
 					player2.incrementScore();
+					p2Score.textContent = player2.getScore();
 				}
-				// if someone has already won
+				conditions.setAllowed(false);
 				return true;
-				}
+			}
 		}
-		// if there is no winner currently
+		console.log("No wins yet!")
 		return false;
+
 	}
-	
-	return {render,edit,check,reset,isNowFilled}
+
+	// rest array
+	const resetArray = function(){
+		arr.forEach((item,index,arr) => {
+			arr[index] = "";
+		})
+		console.log("Array had a reset");
+	}
+
+	return {edit,isNowFilled,check,resetArray};
 })();
 
-// player1
-const player1 = (function(name = "Player1"){
-	const symbol = "X";
-	let score = 0;
-	const incrementScore = function(){
-		score++;
-	};
-	const getScore = function(){
-		return score;
-	};
-	const setScore = function(value){
-		score = value;
-	}
-	return {getScore,symbol,name,incrementScore,setScore}
-})();
+// reset the entire game
+reset.addEventListener("click",() => {
+	p1Name.value = "Player1";
+	p2Name.value = "Player2";
+	player1.setScore(0);
+	player2.setScore(0);	
+	p1Score.textContent = 0;
+	p2Score.textContent = 0;
+	game.resetArray();
+	conditions.setAllowed(true);
+	uwu.forEach((item) => {
+		item.textContent = "";
+	})
+});
 
-// player2
-const player2 = (function(name = "Player2"){
-	const symbol = "O";
-	let score = 0;
-	function getScore(){
-		return score;
-	}
-	const incrementScore = function(){
-		score++;
-	};
-	const setScore = function(value){
-		score = value;
-	}
-	return {name,symbol,getScore,incrementScore,setScore};
-})();
 
-const gameFlow = (function(){
-	const play = function(){
-		console.log("Lets play Tic-Tac-Toe");
-		console.log("In each player turn enter a position from 0-8 to place your symbol in that position");
-		
-		//ask user name
-		// let chooseName = prompt("What is player1 name?");
-		// player1.name = chooseName;
-		// chooseName = prompt("What is player2 name?");
-		// player2.name = chooseName;
-		player1.name = "Shivane";
-		player2.name = "Mayank";
-		
-		//display user name
-		console.log(`Player1: ${player1.name} Sign: ${player1.symbol}`);
-		console.log(`Player2: ${player2.name} Sign: ${player2.symbol}`);
-		console.log("Lets's Start!");
+uwu.forEach((item, index) => {
+    item.addEventListener("click", () => {
+        if (conditions.getAllowed()) {
+			// if the getTurn is even then it is player1 Turn if odd palyer2
+            const currentPlayer = conditions.getTurn() % 2 === 0 ? player1 : player2;
+			// only allowed to change value if game.edit returns true
+            const moveSuccess = game.edit(index, currentPlayer.symbol);
+            if (moveSuccess) {
+                item.textContent = currentPlayer.symbol;
+                if (game.check() || game.isNowFilled()) {
+                    conditions.setAllowed(false);
+                }
+                conditions.incrementTurn();
+            }
+        }
+    });
+});
 
-		// this will be used to check if the player wants to resatrt the game again
-		let restart = false;
-		while(restart === false){
-			game.reset();
-			while((!game.check()) || (!game.isNowFilled())){
-				if(game.check() === true){
-					break;
-				}else if(game.isNowFilled() === true){
-					console.log("The gameBoard is now filled");
-					break;
-				}
-				game.edit(player1.symbol);
-				game.render();
-				if(game.check() === true){
-					break;
-				}else if(game.isNowFilled() === true){
-					console.log("The gameBoard is now filled");
-					break;
-				}
-	
-				game.edit(player2.symbol);
-				game.render();	
-				if(game.check() === true){
-					break;
-				}else if(game.isNowFilled() === true){
-					console.log("The gameBoard is now filled");
-					break;
-				}
-			}
-			let question = confirm("Do you want another round?");
-			if(question === false){
-				restart = true;
-			}
-		}
-
-		console.log(`${player1.name} score: ${player1.getScore()}`);
-		console.log(`${player2.name} score: ${player2.getScore()}`);
-		console.log("Game has finished");
-	}
-
-	return {play};
-})();
+// can be used to continue playing game without reseting the score board
+playAgain.addEventListener("click",() => {
+	game.resetArray();
+	conditions.setAllowed(true);
+	uwu.forEach((item) => {
+		item.textContent = "";
+	})
+})
