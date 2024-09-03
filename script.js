@@ -62,6 +62,29 @@ p2Name.addEventListener("input", () => {
 	player2.name = p2Name.value;
 });
 
+// all kind of condition to be checked for gameFlow
+const conditions = (function(){
+	let turn = 0;
+	let allowed = true;
+	const getTurn = function(){
+		return turn;
+	}
+
+	const incrementTurn = function(){
+		turn++;
+	}
+
+	const getAllowed = function(){
+		return allowed;
+	}
+
+	const setAllowed = function(value){
+		allowed = value;
+	}
+
+	return {getTurn,incrementTurn,getAllowed,setAllowed};
+})()
+
 const game = (function(){
 	const arr = ["","","","","","","","",""];
 
@@ -86,6 +109,7 @@ const game = (function(){
 			return false;
 		}else if(!(arr.includes(""))){
 			console.log("The array is Full!");
+			conditions.setAllowed(false);
 			return true;
 		}
 	}
@@ -114,6 +138,7 @@ const game = (function(){
 					player2.incrementScore();
 					p2Score.textContent = player2.getScore();
 				}
+				conditions.setAllowed(false);
 				return true;
 			}
 		}
@@ -145,16 +170,29 @@ reset.addEventListener("click",() => {
 	p1Score.textContent = 0;
 	p2Score.textContent = 0;
 	game.resetArray();
-	right = true;
+	conditions.setAllowed(true);
 	uwu.forEach((item) => {
 		item.textContent = "";
 	})
 });
 
+
 uwu.forEach((item,index,array) => {
-			item.addEventListener("click",() => {
+	item.addEventListener("click",() => {
+	if(conditions.getAllowed() === true){
+		if(conditions.getTurn() % 2 !== 0){
+			item.textContent = player2.symbol;
+			game.edit(index,player2.symbol);
+			game.check()
+			game.isNowFilled();
+			conditions.incrementTurn();
+		}else if(conditions.getTurn() % 2 === 0){
 			item.textContent = player1.symbol;
 			game.edit(index,player1.symbol);
 			game.check()
 			game.isNowFilled();
-})});
+			conditions.incrementTurn();
+		}
+	}
+	})
+});
