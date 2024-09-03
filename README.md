@@ -27,8 +27,8 @@ Play Again:
 
 # ScreenShots
 
-![Tic-Tac-Toe Game](Screenshot/one.png);
-![Tic-Tac-Toe Game](Screenshot/two.png);
+![Tic-Tac-Toe Game](Screenshot/one.png)
+![Tic-Tac-Toe Game](Screenshot/two.png)
 
 
 # Contributing
