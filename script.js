@@ -181,11 +181,11 @@ uwu.forEach((item,index,array) => {
 	item.addEventListener("click",() => {
 	if(conditions.getAllowed() === true){
 		if(conditions.getTurn() % 2 !== 0){
-			item.textContent = player2.symbol;
+			item.textContent = player2.symbol;	
 			game.edit(index,player2.symbol);
+			conditions.incrementTurn();
 			game.check()
 			game.isNowFilled();
-			conditions.incrementTurn();
 		}else if(conditions.getTurn() % 2 === 0){
 			item.textContent = player1.symbol;
 			game.edit(index,player1.symbol);
@@ -196,3 +196,11 @@ uwu.forEach((item,index,array) => {
 	}
 	})
 });
+
+playAgain.addEventListener("click",() => {
+	game.resetArray();
+	conditions.setAllowed(true);
+	uwu.forEach((item) => {
+		item.textContent = "";
+	})
+})
