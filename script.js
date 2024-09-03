@@ -5,8 +5,9 @@ const p2Score = document.querySelector(".p2Score");
 const reset = document.querySelector(".reset");
 const playAgain = document.querySelector(".playAgain");
 const uwu = document.querySelectorAll(".uwu");
-const dialog = document.querySelector("dialog");
 const result = document.querySelector(".result");
+const dialog = document.querySelector("dialog");
+const dialogText = document.querySelector(".dialog-text"); 
 p1Score.textContent = 0;
 p2Score.textContent = 0;
 p1Name.value = "Player1";
@@ -139,10 +140,15 @@ const game = (function(){
 					console.log(`${player1.name} wins!`);
 					player1.incrementScore();
 					p1Score.textContent = player1.getScore();
+					p2Score.textContent = player1.getScore();
+					dialogText.textContent = `${player1.name} won!`;
+					dialog.showModal();
 				}else if(arr[a] === "O"){
 					console.log(`${player2.name} wins!`);
 					player2.incrementScore();
 					p2Score.textContent = player2.getScore();
+					dialogText.textContent = `${player2.name} won!`;
+					dialog.showModal();
 				}
 				conditions.setAllowed(false);
 				return true;
@@ -205,4 +211,9 @@ playAgain.addEventListener("click",() => {
 	uwu.forEach((item) => {
 		item.textContent = "";
 	})
+})
+
+
+dialog.addEventListener("click",() => {
+	dialog.close();
 })

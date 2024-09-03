@@ -84,6 +84,7 @@ body{
     grid-template-rows: repeat(3,1fr);
     margin-bottom: -30px;
     box-shadow: rgb(38, 57, 77) 0px 30px 30px -10px;
+    position: relative;
 }
 
 /* constains reset and playagain button */
@@ -168,6 +169,17 @@ body{
 
     & > h4{
         font-size: 6rem;
+    }
+}
+
+dialog{
+    border: none;
+    outline: 2px solid;
+    padding: 20px;
+    background-color: transparent;
+
+    &::backdrop{
+        backdrop-filter: blur(10px);
     }
 }
 
