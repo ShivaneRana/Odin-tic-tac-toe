@@ -39,7 +39,3 @@ Play Again:
 # Contributing
 
 Feel free to open issues or submit pull requests if you have suggestions or improvements.
-
--------
-
-Feel free to add or modify sections based on additional features or details about your project!
