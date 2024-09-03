@@ -27,10 +27,12 @@ Play Again:
 
 # ScreenShots
 
-DESKTOP DESIGN
+
+### Desktop~
 ![Tic-Tac-Toe Game](Screenshot/one.png)
 
-MOBILE DESIGN
+
+### Mobile~
 ![Tic-Tac-Toe Game](Screenshot/two.png)
 
 
