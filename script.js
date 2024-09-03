@@ -12,6 +12,7 @@ const game = (function(){
 
 	const arr = ["","","","","","","","",""];
 
+
 	const edit = function(num,Symbol){
 		if(num > 8){
 			console.log("num is out of bound");
@@ -124,15 +125,35 @@ const player2 = (function(){
 
 
 uwu.forEach((item,index,array) => {
-	item.addEventListener("click",() => {
+	while((!game.check()) || (!game.isNowFilled())){
+		if(game.check() === true){
+			break;
+		}else if(game.isNowFilled() === true){
+			console.log("The gameBoard is now filled");
+			break;
+		}
+
+		item.addEventListener("click",() => {
+			item.textContent = player2.symbol;
 			game.edit(index,player2.symbol);
 			game.winCheck()
 			game.isNowFilled();
-	})
+		})
+		
+		if(game.check() === true){
+			break;
+		}else if(game.isNowFilled() === true){
+			console.log("The gameBoard is now filled");
+			break;
+		}
+		if(game.check() === true){
+			break;
+		}else if(game.isNowFilled() === true){
+			console.log("The gameBoard is now filled");
+			break;
+		}
+	}
 })
-
-p1Name.value = "Player1";
-p2Name.value = "Player2";
 
 p1Name.addEventListener("input", () => {
 	player1.name = p1Name.value;
@@ -142,6 +163,7 @@ p2Name.addEventListener("input", () => {
 	player2.name = p2Name.value;
 });
 
+
 reset.addEventListener("click",() => {
 	p1Name.value = "Player1";
 	p2Name.value = "Player2";
@@ -150,4 +172,8 @@ reset.addEventListener("click",() => {
 	p1Score.textContent = 0;
 	p2Score.textContent = 0;
 	game.resetArray();
+
+	uwu.forEach((item) => {
+		item.textContent = "";
+	})
 });
