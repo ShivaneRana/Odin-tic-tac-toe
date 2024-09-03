@@ -145,32 +145,16 @@ reset.addEventListener("click",() => {
 	p1Score.textContent = 0;
 	p2Score.textContent = 0;
 	game.resetArray();
-
+	right = true;
 	uwu.forEach((item) => {
 		item.textContent = "";
 	})
 });
 
-const gameFlow = (function(){
-	const play = function(){
-
-	
-	console.log(`Player1: ${player1.name} Sign: ${player1.symbol}`);
-	console.log(`Player2: ${player2.name} Sign: ${player2.symbol}`);
-	console.log("Lets's Start!");
-
-	uwu.forEach((item,index,array) => {
+uwu.forEach((item,index,array) => {
 			item.addEventListener("click",() => {
-			item.textContent = player2.symbol;
-			game.edit(index,player2.symbol);
-				game.check()
+			item.textContent = player1.symbol;
+			game.edit(index,player1.symbol);
+			game.check()
 			game.isNowFilled();
-		})
-
-	})
-
-	}
-	return {play};
-})();
-
-gameFlow.play();
+})});
