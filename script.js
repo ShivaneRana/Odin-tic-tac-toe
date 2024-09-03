@@ -7,9 +7,62 @@ const playAgain = document.querySelector(".playAgain");
 const uwu = document.querySelectorAll(".uwu");
 p1Score.textContent = 0;
 p2Score.textContent = 0;
+p1Name.value = "Player1";
+p2Name.value = "Player2";
+
+// player1 module
+const player1 = (function(){
+	let name = p1Name.value;
+	const symbol = "X";
+	let score = 0;
+
+	const getScore = function(){
+		return score;
+	}
+
+	const setScore = function(value){
+		score = value;
+	}
+
+	const incrementScore = function(){
+		score++;
+	}
+
+	return {getScore,name,symbol,incrementScore,setScore};
+})();
+
+// player2 module 
+const player2 = (function(){
+	let name = p2Name.value;
+	const symbol = "O";
+	let score = 0;
+
+	const getScore = function(){
+		return score;
+	}
+
+	const setScore = function(value){
+		score = value;
+	}
+
+	const incrementScore = function(){
+		score++;
+	}
+
+	return {getScore,name,symbol,incrementScore,setScore};
+})();
+
+// to keep player1 name upto date
+p1Name.addEventListener("input", () => {
+	player1.name = p1Name.value;
+})
+
+// to keep player2 name upto date
+p2Name.addEventListener("input", () => {
+	player2.name = p2Name.value;
+});
 
 const game = (function(){
-
 	const arr = ["","","","","","","","",""];
 
 
@@ -30,12 +83,14 @@ const game = (function(){
 	const isNowFilled = function(){
 		if(arr.includes("")){
 			console.log("The array is not full yet!");
+			return false;
 		}else if(!(arr.includes(""))){
 			console.log("The array is Full!");
+			return true;
 		}
 	}
 
-	const winCheck = function(){
+	const check = function(){
 		const winning = [
 			[0,1,2],
 			[3,4,5],
@@ -62,6 +117,7 @@ const game = (function(){
 				return true;
 			}
 		}
+		console.log("No wins yet!")
 		return false;
 
 	}
@@ -77,93 +133,10 @@ const game = (function(){
 		console.log(arr);
 	}
 
-	return {edit,displayArray,isNowFilled,winCheck,resetArray};
+	return {edit,displayArray,isNowFilled,check,resetArray};
 })();
 
-
-
-const player1 = (function(){
-	let name = p1Name.value;
-	const symbol = "X";
-	let score = 0;
-
-	const getScore = function(){
-		return score;
-	}
-
-	const setScore = function(value){
-		score = value;
-	}
-
-	const incrementScore = function(){
-		score++;
-	}
-
-	return {getScore,name,symbol,incrementScore,setScore};
-})();
-
-
-const player2 = (function(){
-	let name = p2Name.value;
-	const symbol = "O";
-	let score = 0;
-
-	const getScore = function(){
-		return score;
-	}
-
-	const setScore = function(value){
-		score = value;
-	}
-
-	const incrementScore = function(){
-		score++;
-	}
-
-	return {getScore,name,symbol,incrementScore,setScore};
-})();
-
-
-uwu.forEach((item,index,array) => {
-	while((!game.check()) || (!game.isNowFilled())){
-		if(game.check() === true){
-			break;
-		}else if(game.isNowFilled() === true){
-			console.log("The gameBoard is now filled");
-			break;
-		}
-
-		item.addEventListener("click",() => {
-			item.textContent = player2.symbol;
-			game.edit(index,player2.symbol);
-			game.winCheck()
-			game.isNowFilled();
-		})
-		
-		if(game.check() === true){
-			break;
-		}else if(game.isNowFilled() === true){
-			console.log("The gameBoard is now filled");
-			break;
-		}
-		if(game.check() === true){
-			break;
-		}else if(game.isNowFilled() === true){
-			console.log("The gameBoard is now filled");
-			break;
-		}
-	}
-})
-
-p1Name.addEventListener("input", () => {
-	player1.name = p1Name.value;
-})
-
-p2Name.addEventListener("input", () => {
-	player2.name = p2Name.value;
-});
-
-
+// reset the entire game
 reset.addEventListener("click",() => {
 	p1Name.value = "Player1";
 	p2Name.value = "Player2";
@@ -177,3 +150,27 @@ reset.addEventListener("click",() => {
 		item.textContent = "";
 	})
 });
+
+const gameFlow = (function(){
+	const play = function(){
+
+	
+	console.log(`Player1: ${player1.name} Sign: ${player1.symbol}`);
+	console.log(`Player2: ${player2.name} Sign: ${player2.symbol}`);
+	console.log("Lets's Start!");
+
+	uwu.forEach((item,index,array) => {
+			item.addEventListener("click",() => {
+			item.textContent = player2.symbol;
+			game.edit(index,player2.symbol);
+				game.check()
+			game.isNowFilled();
+		})
+
+	})
+
+	}
+	return {play};
+})();
+
+gameFlow.play();
