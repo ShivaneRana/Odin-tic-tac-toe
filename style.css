@@ -27,6 +27,7 @@ body{
     width: 100vw;
     display: flex;
     justify-content: center;
+    position: relative;
     align-items: center;
     flex-direction: column;
 }
@@ -177,7 +178,10 @@ dialog{
     outline: 2px solid;
     padding: 20px;
     background-color: transparent;
-
+    position: fixed; /* Change to fixed to center relative to the viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     &::backdrop{
         backdrop-filter: blur(10px);
     }
