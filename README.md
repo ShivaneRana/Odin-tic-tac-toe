@@ -27,7 +27,10 @@ Play Again:
 
 # ScreenShots
 
+DESKTOP DESIGN
 ![Tic-Tac-Toe Game](Screenshot/one.png)
+
+MOBILE DESIGN
 ![Tic-Tac-Toe Game](Screenshot/two.png)
 
 
